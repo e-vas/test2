@@ -1,0 +1,63 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');*/
+body {
+    background: #f1f1f1;
+    color: #0f141e;
+    font-size: 16px;
+    font-weight: normal;
+    width: 70%;
+    /*font-family: 'Roboto', sans-serif;*/
+}
+
+h1 {
+    font-size: 20px;
+    background-color: #5CA050;
+    color: white;
+    
+    padding: 5px;
+    border: 1px solid gray;
+    margin: 20px;
+}
+
+.addbutton {
+    margin-left: 20%; 
+    padding: 10px;
+    /*border: 1px solid rgb(0, 0, 0);*/
+}
+
+
+.dolist {
+    
+    margin: auto;     
+    font-style: italic;
+    font-size: 16px;
+
+
+    background-color: #c5c5c5;
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: 20px;
+    
+    
+}
+
+.dolist li {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+    padding: 5px;
+    
+}
+
+.buttondel {
+    height: 17px;
+    border: 0;
+    outline: none;
+    background-color: transparent;
+    margin: 0;
+}
+
+
+    
+    
+https://www.youtube.com/watch?v=SpCUuyZZTp8 50-48
