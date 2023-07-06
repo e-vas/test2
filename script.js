@@ -1,21 +1,33 @@
 let toDoList = document.getElementById('toDo'); 
 
-
 let todos = [
     {id: 1, title: 'Title_1'},
     {id: 2, title: 'Title_2'},
     {id: 3, title: 'Title_3'},
-
     {id: 4, title: 'Title_4'},
     {id: 5, title: 'Title_5'},
+    {id: 6, title: 'Title_6'},
 
 ];
-  
 
+
+const addEvent = document.querySelector('button'); 
+addEvent.addEventListener('click', function () {
+    let taskName = document.querySelector('input').value;
+    let lastId = todos.at(-1).id + 1;
+
+    alert(taskName + " " + lastId)
+
+
+    todos.push({id: lastId, title: taskName});
+    
+});
+
+//добавление в список задач из массива
 
 for (i in todos) {
     let li = document.createElement('li');
-    li.innerHTML = "";
+    li.innerHTML = " ";
 
             let inputForm = document.createElement('input');
             inputForm.type = "checkbox";
@@ -41,3 +53,4 @@ for (i in todos) {
     toDoList.append(li);
     
 };
+
