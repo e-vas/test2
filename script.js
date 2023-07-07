@@ -5,8 +5,7 @@ let todos = [
     {id: 2, title: 'Title_2'},
     {id: 3, title: 'Title_3'},
     {id: 4, title: 'Title_4'},
-    {id: 5, title: 'Title_5'},
-    {id: 6, title: 'Title_6'},
+
 
 ];
 
@@ -18,7 +17,8 @@ function addTask(event) {
     let taskName = document.querySelector('input').value;
     let lastId = todos.at(-1).id + 1;
     todos.push({id: lastId, title: taskName});
-    updateTodos ({id: lastId, title: taskName});    
+    updateTodos (todos.length - 1);    
+    console.log(todos);
 };
 
 
@@ -27,15 +27,15 @@ for (i in todos) {
 };
 
 
-function updateTodos ({id: x, title: y}){
+function updateTodos (i){
         let li = document.createElement('li');
         li.innerHTML = " ";
                 let inputForm = document.createElement('input');
                 inputForm.type = "checkbox";
                 li.append(inputForm);
 
-                let textTitle = document.createTextNode(todos[todos.length - 1].title);
-                textTitle.innerHTML = todos[todos.length - 1].title;
+                let textTitle = document.createTextNode(todos[i].title);
+                textTitle.innerHTML = todos[i].title;
                 li.append(textTitle);
                 
                 let buttonD = document.createElement('button');
@@ -51,3 +51,4 @@ function updateTodos ({id: x, title: y}){
 
         toDoList.append(li);        
 }
+
