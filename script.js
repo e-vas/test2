@@ -12,16 +12,44 @@ let todos = [
 
 
 const addEvent = document.querySelector('button'); 
-addEvent.addEventListener('click', function () {
+addEvent.addEventListener('click', addTask);
+
+function addTask(event) {
+    event.preventDefault();
     let taskName = document.querySelector('input').value;
     let lastId = todos.at(-1).id + 1;
-
-    alert(taskName + " " + lastId)
-
-
     todos.push({id: lastId, title: taskName});
-    
-});
+  
+    //console.log(todos);
+
+
+    let li = document.createElement('li');
+    li.innerHTML = " ";
+
+            let inputForm = document.createElement('input');
+            inputForm.type = "checkbox";
+            li.append(inputForm);
+
+            let textTitle = document.createTextNode(todos[todos.length - 1].title);
+            textTitle.innerHTML = todos[todos.length - 1].title;
+            li.append(textTitle);
+            
+            let buttonD = document.createElement('button');
+            buttonD.type="button";
+            buttonD.class="buttondel";
+
+                    let imgD = document.createElement('img');
+                    imgD.src = "https://cdn-icons-png.flaticon.com/512/3687/3687412.png";
+                    imgD.height="17";
+                    buttonD.append(imgD);
+
+            li.append(buttonD);
+            
+
+    toDoList.append(li);
+};
+
+
 
 //добавление в список задач из массива
 
