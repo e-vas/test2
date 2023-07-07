@@ -17,25 +17,26 @@ function addTask(event) {
     let taskName = document.querySelector('input').value;
     let lastId = todos.at(-1).id + 1;
     todos.push({id: lastId, title: taskName});
-    updateTodos (todos.length - 1);    
-    console.log(todos);
+    updateTodos ({id: lastId, title: taskName});    
+    //console.log(todos);
 };
 
 
 for (i in todos) {
-        updateTodos (i);
+        updateTodos (todos[i]);
+
 };
 
 
-function updateTodos (i){
+function updateTodos ({ id, title }){
         let li = document.createElement('li');
         li.innerHTML = " ";
                 let inputForm = document.createElement('input');
                 inputForm.type = "checkbox";
                 li.append(inputForm);
 
-                let textTitle = document.createTextNode(todos[i].title);
-                textTitle.innerHTML = todos[i].title;
+                let textTitle = document.createTextNode(title);
+                textTitle.innerHTML = title;
                 li.append(textTitle);
                 
                 let buttonD = document.createElement('button');
