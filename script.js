@@ -2,7 +2,7 @@
 function addTask(event) {
         event.preventDefault();
         let taskValue = taskName.value    
-        lastId ++;
+        const lastId = Date.now();
         todos.push({id: lastId, title: taskValue, done: false}); //Добавление нового эл-та в массив
         updateTodos ({id: lastId, title: taskValue, done: false}); //Функция добавления на стр    
         document.querySelector('input').value = ""; //Сброс значения в строке
@@ -67,7 +67,7 @@ function dellTask (liID){
         //}
 };
 
-
+// изменение чекбокса done в массиве и на странице 
 function doneTask(li, inputForm, id) {
         const liIndex = todos.findIndex(i => i.id == id);
         const isDone = inputForm.checked;
@@ -81,6 +81,7 @@ function doneTask(li, inputForm, id) {
 
 }
 
+//зачеркивание текста при значении чекбокса done===true
 function doneTaskClass(li, done){
         if (done === true){
                 li.className = 'done-task';
@@ -90,39 +91,41 @@ function doneTaskClass(li, done){
 }
 
 
+// получение todos
+async function getTodos() {
+        let response = await fetch('https://jsonplaceholder.typicode.com/todos')
+        if (response.ok) {
+                let data = await response.json();
+                //console.log(data);
+                for (let i = 0; i < 20; i++) {
+                        //console.log(data[i])
+                        todos.push({id: data[i].id, title: data[i].title, done: data[i].completed});
+                        //console.log(todos[i])
+                }
 
+              } else {
+                console.log('error', response.status);
+              }
 
-// массив задач
-let toDoList = document.getElementById('toDo'); 
-let todos = [
-    {id: 1, title: 'Title_1', done: true},
-    {id: 2, title: 'Title_2', done: false},
-    {id: 3, title: 'Title_3', done: true},
-    {id: 4, title: 'Title_4', done: false},
-];
-
-// Найти кнопку ADD и добавить к ней событие
-const addEvent = document.querySelector('button'); 
-addEvent.addEventListener('click', addTask);
-
-//Счетчик id в массиве todos
-let lastId;
-if (todos.length === 0) {
-    lastId = 0;
-} else {
-    lastId = todos.at(-1).id + 1;
+        //console.log(todos)
+        //console.log(todos.length)
+        //return todos;
+        startingTodos  ()
 }
 
-//Поиск кн Add
-let taskName = document.querySelector('input'); 
-
-
 // Отображение всех элементов массива todos
-for (i in todos) {
-        updateTodos (todos[i]);
-       
+function startingTodos () {
+        for (i in todos) {
+                //console.log(todos[i])
+                updateTodos (todos[i]);     
+        };
 };
+    
+let todos = [];
+let taskName = document.querySelector('input'); //Поиск поля ввода
+const addEvent = document.querySelector('button'); // Найти кнопку ADD 
+let toDoList = document.getElementById('toDo'); //поиск списка задач
+addEvent.addEventListener('click', addTask); //добавить событие к кнопке add
 
 
-
-
+getTodos()
