@@ -1,4 +1,5 @@
-// добавление новой задачи в массив
+import { getTodos } from './gettodos.js';
+
 function addTask(event) {
         event.preventDefault();
         let taskValue = taskName.value    
@@ -57,7 +58,7 @@ function dellTask (liID){
 
 
         //удаление из массива
-        liIndex = todos.findIndex(i => i.id == liID);
+        let liIndex = todos.findIndex(i => i.id == liID);
         todos.splice(liIndex, 1);
 
         //тест
@@ -69,15 +70,16 @@ function dellTask (liID){
 
 // изменение чекбокса done в массиве и на странице 
 function doneTask(li, inputForm, id) {
+        let i = 0;
         const liIndex = todos.findIndex(i => i.id == id);
         const isDone = inputForm.checked;
         todos[liIndex].done = isDone;
         doneTaskClass(li, isDone);
 
-        console.log("________________________________________");
-        for (i in todos){
-                console.log(todos[i]);
-        }
+        //console.log("________________________________________");
+        //for (i in todos){
+        //        console.log(todos[i]);
+        //}
 
 }
 
@@ -91,36 +93,16 @@ function doneTaskClass(li, done){
 }
 
 
-// получение todos
-async function getTodos() {
-        let response = await fetch('https://jsonplaceholder.typicode.com/todos')
-        if (response.ok) {
-                let data = await response.json();
-                //console.log(data);
-                for (let i = 0; i < 20; i++) {
-                        //console.log(data[i])
-                        todos.push({id: data[i].id, title: data[i].title, done: data[i].completed});
-                        //console.log(todos[i])
-                }
-
-              } else {
-                console.log('error', response.status);
-              }
-
-        //console.log(todos)
-        //console.log(todos.length)
-        //return todos;
-        startingTodos  ()
-}
-
 // Отображение всех элементов массива todos
 function startingTodos () {
+        let i = 0;
         for (i in todos) {
                 //console.log(todos[i])
                 updateTodos (todos[i]);     
         };
 };
-    
+
+
 let todos = [];
 let taskName = document.querySelector('input'); //Поиск поля ввода
 const addEvent = document.querySelector('button'); // Найти кнопку ADD 
@@ -128,4 +110,4 @@ let toDoList = document.getElementById('toDo'); //поиск списка зад
 addEvent.addEventListener('click', addTask); //добавить событие к кнопке add
 
 
-getTodos()
+getTodos(todos, startingTodos); //получение todos и старт отрисовки
